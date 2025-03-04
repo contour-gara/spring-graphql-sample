@@ -30,4 +30,14 @@ class AuthorRepositoryImplTest {
         Author expected = new Author("author-1", "Joshua", "Bloch");
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DataSet(value = "datasets/setup/author.yml")
+    @ExpectedDataSet(value = "datasets/expected/author.yml")
+    void IDが存在しない場合例外が返る() {
+        // execute & assert
+        assertThatThrownBy(() -> sut.findById("author-2"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("No author found with id: author-2");
+    }
 }

@@ -18,7 +18,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
                 .param(id)
                 .query(new DataClassRowMapper<>(AuthorEntity.class))
                 .optional()
-                .get()
+                .orElseThrow(() -> new RuntimeException("No author found with id: " + id))
                 .toModel();
     }
 }
