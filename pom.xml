@@ -7,10 +7,10 @@
     <groupId>org.contourgara</groupId>
     <artifactId>spring-graphql-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <modules>
+        <module>integration-test</module>
+        <module>spring-graphql-sample-app-server</module>
+    </modules>
 </project>
