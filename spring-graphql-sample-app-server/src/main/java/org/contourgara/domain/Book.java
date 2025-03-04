@@ -1,4 +1,4 @@
 package org.contourgara.domain;
 
-public record Book() {
+public record Book(String id, String name, int pageCount, String authorId) {
 }

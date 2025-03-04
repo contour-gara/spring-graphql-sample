@@ -1,0 +1,5 @@
+book:
+  - id: "book-1"
+    name: "Effective Java"
+    page_count: 416
+    author_id: "author-1"
