@@ -1,0 +1,46 @@
+services:
+  app-server:
+    build:
+      context: ./spring-graphql-sample-app-server
+      dockerfile: Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    networks:
+      - graphql-nw
+    healthcheck:
+      test: "curl -f http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/graphql
+      SPRING_DATASOURCE_USERNAME: gara
+      SPRING_DATASOURCE_PASSWORD: password
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+
+  mysql:
+    image: mysql:8.0.40-oraclelinux9
+    environment:
+      MYSQL_USER: gara
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: graphql
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - graphql-nw
+    ports:
+      - '3306:3306'
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+networks:
+  graphql-nw:
+    driver: bridge
