@@ -1,20 +1,13 @@
-package org.contourgara;
+package org.contourgara.infrastructure;
 
 import org.contourgara.domain.BookRepository;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-class SpringGraphQLSampleApplicationTest {
+class BookRepositoryImplTest {
     @Autowired
-    BookRepository bookRepository;
-
-    @Test
-    void contextLoads() {
-        // assert
-        assertThat(bookRepository).isNotNull();
-    }
+    BookRepository sut;
 }
