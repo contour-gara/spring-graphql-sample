@@ -18,7 +18,7 @@ public class BookRepositoryImpl implements BookRepository {
                 .param(id)
                 .query(new DataClassRowMapper<>(BookEntity.class))
                 .optional()
-                .get()
+                .orElseThrow(() -> new RuntimeException("No book found with id: " + id))
                 .toModel();
     }
 }

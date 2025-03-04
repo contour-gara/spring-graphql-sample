@@ -30,4 +30,14 @@ class BookRepositoryImplTest {
         Book expected = new Book("book-1", "Effective Java", 416, "author-1");
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DataSet(value = {"datasets/setup/book.yml", "datasets/setup/author.yml"})
+    @ExpectedDataSet(value = {"datasets/expected/book.yml", "datasets/expected/author.yml"})
+    void ID検索が存在しない場合例外が返る() {
+        // execute & assert
+        assertThatThrownBy(() -> sut.findById("book-2"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("No book found with id: book-2");
+    }
 }
