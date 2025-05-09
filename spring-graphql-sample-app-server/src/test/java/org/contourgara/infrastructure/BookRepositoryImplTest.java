@@ -6,7 +6,6 @@ import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import org.contourgara.domain.Book;
 import org.contourgara.domain.BookRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,10 +18,6 @@ import static org.assertj.core.api.Assertions.*;
 class BookRepositoryImplTest {
     @Autowired
     BookRepository sut;
-
-    @BeforeAll
-    @DataSet(value = "datasets/setup/empty.yml")
-    static void setUpAll() {}
 
     @Test
     @DataSet(value = {"datasets/setup/book.yml", "datasets/setup/author.yml"})
